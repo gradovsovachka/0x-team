@@ -1,6 +1,7 @@
 {
   "routes": [
     { "src": "/payment/success", "dest": "/payment/success.html" },
-    { "src": "/payment/error", "dest": "/payment/error.html" }
+    { "src": "/payment/error", "dest": "/payment/error.html" },
+    { "src": "/payment/", "dest": "/payment/index.html" }
   ]
 }

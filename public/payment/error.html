@@ -2,42 +2,72 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Ошибка оплаты</title>
+  <title>0x Money — Ошибка оплаты</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1a0b0b 0%, #000 65%);
+      color: #fff;
+      font-family: Inter, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(220,38,38,0.35);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+    h1 {
+      color: #dc2626;
+      margin-bottom: 12px;
+    }
+    p {
+      color: #d4d4d8;
+      margin-bottom: 28px;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+    a {
+      padding: 12px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .retry {
+      background: #dc2626;
+      color: #fff;
+    }
+    .bot {
+      background: #27272a;
+      color: #fff;
+    }
+  </style>
 </head>
-<body style="
-  margin:0;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  font-family:Arial, sans-serif;
-  background:#fef2f2;
-">
-  <h1 style="color:#dc2626;">❌ Ошибка оплаты</h1>
-  <p>К сожалению, платёж не был выполнен.</p>
+<body>
+  <div class="card">
+    <h1>❌ Ошибка оплаты</h1>
+    <p>
+      Платёж не был выполнен.  
+      Попробуйте снова или вернитесь в Telegram-бот.
+    </p>
 
-  <div style="margin-top:20px; display:flex; gap:12px;">
-    <a href="/payment" style="
-      padding:12px 20px;
-      background:#dc2626;
-      color:#fff;
-      text-decoration:none;
-      border-radius:8px;
-    ">
-      Повторить оплату
-    </a>
-
-    <a href="/" style="
-      padding:12px 20px;
-      background:#6b7280;
-      color:#fff;
-      text-decoration:none;
-      border-radius:8px;
-    ">
-      На главную
-    </a>
+    <div class="actions">
+      <a class="retry" href="/payment">Повторить</a>
+      <a class="bot" href="https://t.me/operator_money_robot" target="_blank">
+        В бот
+      </a>
+    </div>
   </div>
 </body>
 </html>
