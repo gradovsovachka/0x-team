@@ -21,12 +21,5 @@
         { "key": "x-vercel-cache", "value": "" }
       ]
     }
-  ],
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "destination": "/error",
-      "statusCode": 404
-    }
   ]
 }
