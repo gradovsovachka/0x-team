@@ -2,8 +2,13 @@
   "routes": [
     { "src": "/payment/success", "dest": "/payment/success.html" },
     { "src": "/payment/error", "dest": "/payment/error.html" },
+    { "src": "/payment$", "dest": "/payment/index.html" },
     { "src": "/payment/", "dest": "/payment/index.html" },
-    { "src": "/", "dest": "/index.html" },
-    { "src": "/support", "dest": "/support.html" }
+
+    { "src": "/discord$", "dest": "/discord/index.html" },
+    { "src": "/discord/verified", "dest": "/discord/verified.html" },
+
+    { "src": "/support", "dest": "/support.html" },
+    { "src": "/", "dest": "/index.html" }
   ]
 }
