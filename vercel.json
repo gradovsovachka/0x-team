@@ -24,5 +24,7 @@
         { "key": "x-vercel-cache", "value": "" }
       ]
     }
-  ]
+  ],
+  "public": true
+
 }
