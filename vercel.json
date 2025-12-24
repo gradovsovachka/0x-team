@@ -19,10 +19,5 @@
         { "key": "X-Powered-By", "value": "PHP/8.2" }
       ]
     }
-  ],
-  "functions": {
-    "api/*.js": {
-      "runtime": "nodejs20.x"
-    }
-  }
+  ]
 }
