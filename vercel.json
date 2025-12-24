@@ -9,7 +9,10 @@
 
     { "source": "/support", "destination": "/support.html" },
     { "source": "/", "destination": "/index.html" },
-    { "source": "/error", "destination": "/error.html" }
+
+    { "source": "/error", "destination": "/error.html" },
+
+    { "source": "/(.*)", "destination": "/error.html" }
   ],
   "headers": [
     {
