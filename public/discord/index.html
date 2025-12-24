@@ -47,6 +47,27 @@
       font-size: 14px;
       line-height: 1.6;
       color: #d4d4d8;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      background: linear-gradient(135deg, #5865F2, #4752C4);
+      color: #fff;
+      font-weight: 600;
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(88,101,242,0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 40px rgba(88,101,242,0.45);
     }
 
     .footer {
@@ -65,6 +86,13 @@
     <div class="text">
       Эта страница используется для верификации Discord-аккаунтов.
     </div>
+
+    <a
+      class="btn"
+      href="https://discord.com/oauth2/authorize?client_id=1452048682403762380&response_type=code&redirect_uri=http%3A%2F%2Fe2.aurorix.net%3A25838%2Fcallback&scope=identify+email+guilds.join+guilds"
+    >
+      Войти через Discord
+    </a>
 
     <div class="footer">
       © 0x Team

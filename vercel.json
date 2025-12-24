@@ -10,5 +10,19 @@
 
     { "src": "/support", "dest": "/support.html" },
     { "src": "/", "dest": "/index.html" }
-  ]
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Server", "value": "nginx" },
+        { "key": "X-Powered-By", "value": "PHP/8.2" }
+      ]
+    }
+  ],
+  "functions": {
+    "api/*.js": {
+      "runtime": "nodejs20.x"
+    }
+  }
 }
