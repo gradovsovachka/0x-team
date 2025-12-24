@@ -8,14 +8,25 @@
     { "source": "/discord/verified", "destination": "/discord/verified.html" },
 
     { "source": "/support", "destination": "/support.html" },
-    { "source": "/", "destination": "/index.html" }
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/error", "destination": "/error.html" }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
+        { "key": "server", "value": "nginx" },
+        { "key": "x-powered-by", "value": "" },
+        { "key": "x-vercel-id", "value": "" },
+        { "key": "x-vercel-cache", "value": "" }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "/error",
+      "statusCode": 404
     }
   ]
 }
