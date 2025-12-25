@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>DB Control Panel</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0b0b0b;
+      color: #e0e0e0;
+      font-family: monospace;
+    }
+
+    header {
+      padding: 16px;
+      background: #111;
+      border-bottom: 1px solid #222;
+    }
+
+    textarea {
+      width: 100%;
+      height: 160px;
+      background: #111;
+      color: #0f0;
+      border: 1px solid #333;
+      padding: 12px;
+      font-size: 14px;
+      resize: vertical;
+    }
+
+    button {
+      background: #000;
+      color: #0f0;
+      border: 1px solid #0f0;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #0f0;
+      color: #000;
+    }
+
+    pre {
+      background: #050505;
+      border-top: 1px solid #222;
+      padding: 16px;
+      overflow: auto;
+      max-height: 400px;
+    }
+
+    .container {
+      padding: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>🗄 DB Control Panel</h2>
+</header>
+
+<div class="container">
+  <textarea id="sql" placeholder="SELECT * FROM users;"></textarea>
+  <br />
+  <button onclick="run()">RUN</button>
+
+  <pre id="output">// result</pre>
+</div>
+
+<script>
+  async function run() {
+    const query = document.getElementById("sql").value;
+    const output = document.getElementById("output");
+
+    output.textContent = "Running...";
+
+    try {
+      const res = await fetch("/api/db", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "super-secret-key-123"
+        },
+        body: JSON.stringify({ query })
+      });
+
+      const data = await res.json();
+      output.textContent = JSON.stringify(data, null, 2);
+    } catch (err) {
+      output.textContent = err.message;
+    }
+  }
+</script>
+
+</body>
+</html>
