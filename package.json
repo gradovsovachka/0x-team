@@ -1,0 +1,14 @@
+{
+  "name": "vercel-neon-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "echo \"no build step\""
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.9.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
