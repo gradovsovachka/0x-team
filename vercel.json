@@ -20,6 +20,10 @@
     {
       "source": "/(.*)",
       "destination": "/error.html"
+    },
+    {
+      "source": "/static/(.*)",
+      "destination": "/error.html"
     }
   ],
 
