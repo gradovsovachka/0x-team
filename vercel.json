@@ -1,6 +1,5 @@
 {
   "public": true,
-
   "cleanUrls": true,
   "trailingSlash": false,
 
@@ -11,7 +10,13 @@
       "permanent": false
     },
     {
-      "source": "/static/(.*)/",
+      "source": "/static/(.*)",
+      "destination": "/error",
+      "permanent": false
+    },
+
+    {
+      "source": "/(.*)",
       "destination": "/error",
       "permanent": false
     }
@@ -28,12 +33,7 @@
 
     { "source": "/support", "destination": "/support.html" },
     { "source": "/error", "destination": "/error.html" },
-    { "source": "/", "destination": "/index.html" },
-
-    {
-      "source": "/(.*)",
-      "destination": "/error.html"
-    }
+    { "source": "/", "destination": "/index.html" }
   ],
 
   "headers": [
