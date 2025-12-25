@@ -13,12 +13,6 @@
       "source": "/static/(.*)",
       "destination": "/error",
       "permanent": false
-    },
-
-    {
-      "source": "/(.*)",
-      "destination": "/error",
-      "permanent": false
     }
   ],
 
