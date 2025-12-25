@@ -5,6 +5,11 @@
   "trailingSlash": false,
 
   "rewrites": [
+    {
+      "source": "/static/(.*)",
+      "destination": "/error.html"
+    },
+
     { "source": "/payment/success", "destination": "/payment/success.html" },
     { "source": "/payment/error", "destination": "/payment/error.html" },
     { "source": "/payment", "destination": "/payment/index.html" },
@@ -19,10 +24,6 @@
 
     {
       "source": "/(.*)",
-      "destination": "/error.html"
-    },
-    {
-      "source": "/static/(.*)",
       "destination": "/error.html"
     }
   ],
