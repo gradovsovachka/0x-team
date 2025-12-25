@@ -4,12 +4,20 @@
   "cleanUrls": true,
   "trailingSlash": false,
 
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/static/(.*)",
-      "destination": "/error.html"
+      "source": "/static",
+      "destination": "/error",
+      "permanent": false
     },
+    {
+      "source": "/static/(.*)/",
+      "destination": "/error",
+      "permanent": false
+    }
+  ],
 
+  "rewrites": [
     { "source": "/payment/success", "destination": "/payment/success.html" },
     { "source": "/payment/error", "destination": "/payment/error.html" },
     { "source": "/payment", "destination": "/payment/index.html" },
@@ -32,20 +40,12 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Server", "value": "nginx" },
-        { "key": "X-Powered-By", "value": "" },
-        { "key": "X-Vercel-Id", "value": "" },
-        { "key": "X-Vercel-Cache", "value": "" },
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         {
           "key": "Content-Security-Policy",
           "value": "default-src 'self'; img-src 'self' data: https:; script-src 'self'; style-src 'self' 'unsafe-inline'"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
         }
       ]
     },
