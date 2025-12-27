@@ -124,6 +124,11 @@ a {
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
+.discord {
+  background: #27272a;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
 
 .footer {
   margin-top: 28px;
