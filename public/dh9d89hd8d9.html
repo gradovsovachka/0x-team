@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>API Control Panel</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    padding: 20px;
+}
+h2 {
+    margin-top: 30px;
+}
+.box {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}
+input, button {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+}
+button {
+    cursor: pointer;
+}
+pre {
+    background: #111;
+    color: #0f0;
+    padding: 10px;
+    overflow-x: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+td, th {
+    border: 1px solid #ccc;
+    padding: 6px;
+    font-size: 13px;
+}
+th {
+    background: #eee;
+}
+</style>
+</head>
+<body>
+
+<h2>🔑 Access Token</h2>
+<div class="box">
+    <input id="token" type="password" placeholder="Вставь access token полностью">
+    <button onclick="setToken()">Save token</button>
+</div>
+
+<h2>🔐 Admin Login</h2>
+<div class="box">
+    <input id="admin_user" placeholder="username">
+    <input id="admin_pass" type="password" placeholder="password">
+    <button onclick="adminLogin()">Login admin</button>
+</div>
+
+<h2>👤 User Login</h2>
+<div class="box">
+    <input id="user_email" placeholder="email">
+    <input id="user_pass" type="password" placeholder="password">
+    <button onclick="userLogin()">Login user</button>
+</div>
+
+<h2>➕ Create Admin</h2>
+<div class="box">
+    <input id="new_admin" placeholder="username">
+    <input id="new_admin_pass" type="password" placeholder="password">
+    <button onclick="createAdmin()">Create admin</button>
+</div>
+
+<h2>➕ Create User</h2>
+<div class="box">
+    <input id="new_email" placeholder="email">
+    <input id="new_pass" type="password" placeholder="password">
+    <button onclick="createUser()">Create user</button>
+</div>
+
+<h2>👁 All Users (Admins + Users)</h2>
+<div class="box">
+    <button onclick="loadAll()">Load all users</button>
+    <div id="tables"></div>
+</div>
+
+<pre id="out"></pre>
+
+<script>
+const API = "http://d10.aurorix.net:25436";
+let ACCESS_TOKEN = null;
+
+// ---------- helpers ----------
+function headers(json=true){
+    if (!ACCESS_TOKEN) {
+        alert("Сначала введи access token");
+        throw "NO TOKEN";
+    }
+    const h = { "Authorization": ACCESS_TOKEN };
+    if (json) h["Content-Type"] = "application/json";
+    return h;
+}
+
+function log(data){
+    document.getElementById("out").textContent =
+        JSON.stringify(data, null, 2);
+}
+
+// ---------- token ----------
+function setToken(){
+    ACCESS_TOKEN = document.getElementById("token").value.trim();
+    if (ACCESS_TOKEN) {
+        alert("Access token сохранён (в памяти)");
+        document.getElementById("token").value = "";
+    }
+}
+
+// ---------- admin login ----------
+async function adminLogin(){
+    const r = await fetch(API + "/admin/login", {
+        method: "POST",
+        headers: headers(),
+        body: JSON.stringify({
+            username: admin_user.value,
+            password: admin_pass.value
+        })
+    });
+    log(await r.json());
+}
+
+// ---------- user login ----------
+async function userLogin(){
+    const r = await fetch(API + "/user/login", {
+        method: "POST",
+        headers: headers(),
+        body: JSON.stringify({
+            email: user_email.value,
+            password: user_pass.value
+        })
+    });
+    log(await r.json());
+}
+
+// ---------- create admin ----------
+async function createAdmin(){
+    const r = await fetch(API + "/admin/create", {
+        method: "POST",
+        headers: headers(),
+        body: JSON.stringify({
+            username: new_admin.value,
+            password: new_admin_pass.value
+        })
+    });
+    log(await r.json());
+}
+
+// ---------- create user ----------
+async function createUser(){
+    const r = await fetch(API + "/admin/users", {
+        method: "POST",
+        headers: headers(),
+        body: JSON.stringify({
+            email: new_email.value,
+            password: new_pass.value
+        })
+    });
+    log(await r.json());
+}
+
+// ---------- load all ----------
+async function loadAll(){
+    const r = await fetch(API + "/admin/all-users", {
+        headers: headers(false)
+    });
+    const data = await r.json();
+    log(data);
+
+    let html = "<h3>Admins</h3><table><tr><th>ID</th><th>Username</th><th>Password (SHA-256)</th></tr>";
+    data.admins.forEach(a => {
+        html += `<tr><td>${a.id}</td><td>${a.username}</td><td>${a.password}</td></tr>`;
+    });
+    html += "</table>";
+
+    html += "<h3>Users</h3><table><tr><th>ID</th><th>Email</th><th>Password (SHA-256)</th><th>Active</th></tr>";
+    data.users.forEach(u => {
+        html += `<tr><td>${u.id}</td><td>${u.email}</td><td>${u.password}</td><td>${u.is_active}</td></tr>`;
+    });
+    html += "</table>";
+
+    document.getElementById("tables").innerHTML = html;
+}
+</script>
+
+</body>
+</html>
