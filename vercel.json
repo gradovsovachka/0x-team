@@ -1,51 +1,7 @@
 {
   "public": true,
-
   "cleanUrls": true,
   "trailingSlash": false,
-
-  "routes": [
-    {
-      "src": "^/payment/success$",
-      "dest": "/payment/success.html"
-    },
-    {
-      "src": "^/payment/error$",
-      "dest": "/payment/error.html"
-    },
-    {
-      "src": "^/payment$",
-      "dest": "/payment/index.html"
-    },
-    {
-      "src": "^/payment/payment$",
-      "dest": "/payment/payment.html"
-    },
-
-    {
-      "src": "^/discord/verified$",
-      "dest": "/discord/verified.html"
-    },
-    {
-      "src": "^/discord$",
-      "dest": "/discord/index.html"
-    },
-
-    {
-      "src": "^/support$",
-      "dest": "/support.html"
-    },
-    {
-      "src": "^/$",
-      "dest": "/index.html"
-    },
-
-    {
-      "src": ".*",
-      "status": 404,
-      "dest": "/error.html"
-    }
-  ],
 
   "headers": [
     {
@@ -60,13 +16,12 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; base-uri 'none'; form-action 'self'"
+          "value": "default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'"
         },
         { "key": "X-Powered-By", "value": "" },
         { "key": "Server", "value": "" }
       ]
     },
-
     {
       "source": "/(.*)\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2)",
       "headers": [
