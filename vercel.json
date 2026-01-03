@@ -11,7 +11,7 @@
       "permanent": false
     },
     {
-      "source": "/static/(.*)/",
+      "source": "/static/(.*)",
       "destination": "/error",
       "permanent": false
     }
@@ -44,9 +44,15 @@
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         {
+          "key": "Permissions-Policy",
+          "value": "geolocation=(), microphone=(), camera=(), payment=()"
+        },
+        {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; img-src 'self' data: https:; script-src 'self'; style-src 'self' 'unsafe-inline'"
-        }
+          "value": "default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'; base-uri 'none'; form-action 'self'"
+        },
+        { "key": "X-Powered-By", "value": "" },
+        { "key": "Server", "value": "" }
       ]
     },
 
