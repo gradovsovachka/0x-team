@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Киви | Stars & Payments</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Telegram WebApp -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    margin: 0;
+    background: radial-gradient(circle at top, #1b1f3b, #000);
+    color: #fff;
+  }
+
+  .app {
+    max-width: 420px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .logo {
+    font-size: 48px;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 26px;
+  }
+
+  .subtitle {
+    opacity: 0.8;
+    margin-bottom: 25px;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .balance {
+    font-size: 36px;
+    font-weight: bold;
+  }
+
+  .stars {
+    color: gold;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .btn-add {
+    background: linear-gradient(45deg, gold, orange);
+    color: #000;
+  }
+
+  .btn-pay {
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+    color: #000;
+  }
+
+  .btn-close {
+    background: #ff4d4d;
+    color: #fff;
+  }
+
+  .footer {
+    opacity: 0.6;
+    font-size: 13px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+
+<body>
+<div class="app">
+
+  <div class="logo">🥝✨</div>
+  <h1>Киви</h1>
+  <div class="subtitle">Stars & Payments</div>
+
+  <div class="card">
+    <div>Ваш баланс</div>
+    <div class="balance"><span id="stars">0</span> <span class="stars">⭐</span></div>
+  </div>
+
+  <div class="card">
+    <button class="btn-add" onclick="addStars()">➕ Пополнить Stars</button>
+    <button class="btn-pay" onclick="pay()">💸 Оплатить</button>
+  </div>
+
+  <button class="btn-close" onclick="closeApp()">❌ Закрыть</button>
+
+  <div class="footer">
+    Telegram Mini App<br>
+    Kiwi Stars System
+  </div>
+</div>
+
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.expand();
+
+  // Получаем данные пользователя
+  const user = tg.initDataUnsafe?.user;
+  console.log("User:", user);
+
+  let stars = 0;
+
+  function updateUI() {
+    document.getElementById("stars").innerText = stars;
+  }
+
+  function addStars() {
+    // Заглушка пополнения
+    stars += 10;
+    updateUI();
+
+    tg.showPopup({
+      title: "Пополнение",
+      message: "⭐ Добавлено 10 Stars",
+      buttons: [{ type: "ok" }]
+    });
+
+    // Можно отправить данные боту
+    tg.sendData(JSON.stringify({
+      action: "add_stars",
+      amount: 10
+    }));
+  }
+
+  function pay() {
+    if (stars < 5) {
+      tg.showAlert("Недостаточно Stars");
+      return;
+    }
+
+    stars -= 5;
+    updateUI();
+
+    tg.showPopup({
+      title: "Оплата",
+      message: "💸 Списано 5 Stars",
+      buttons: [{ type: "ok" }]
+    });
+
+    tg.sendData(JSON.stringify({
+      action: "pay",
+      amount: 5
+    }));
+  }
+
+  function closeApp() {
+    tg.close();
+  }
+
+  updateUI();
+</script>
+</body>
+</html>
