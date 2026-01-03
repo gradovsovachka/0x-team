@@ -4,35 +4,46 @@
   "cleanUrls": true,
   "trailingSlash": false,
 
-  "redirects": [
+  "routes": [
     {
-      "source": "/static",
-      "destination": "/error",
-      "permanent": false
+      "src": "^/payment/success$",
+      "dest": "/payment/success.html"
     },
     {
-      "source": "/static/(.*)",
-      "destination": "/error",
-      "permanent": false
-    }
-  ],
-
-  "rewrites": [
-    { "source": "/payment/success", "destination": "/payment/success.html" },
-    { "source": "/payment/error", "destination": "/payment/error.html" },
-    { "source": "/payment", "destination": "/payment/index.html" },
-    { "source": "/payment/payment", "destination": "/payment/payment.html" },
-
-    { "source": "/discord/verified", "destination": "/discord/verified.html" },
-    { "source": "/discord", "destination": "/discord/index.html" },
-
-    { "source": "/support", "destination": "/support.html" },
-    { "source": "/error", "destination": "/error.html" },
-    { "source": "/", "destination": "/index.html" },
+      "src": "^/payment/error$",
+      "dest": "/payment/error.html"
+    },
+    {
+      "src": "^/payment$",
+      "dest": "/payment/index.html"
+    },
+    {
+      "src": "^/payment/payment$",
+      "dest": "/payment/payment.html"
+    },
 
     {
-      "source": "/(.*)",
-      "destination": "/error.html"
+      "src": "^/discord/verified$",
+      "dest": "/discord/verified.html"
+    },
+    {
+      "src": "^/discord$",
+      "dest": "/discord/index.html"
+    },
+
+    {
+      "src": "^/support$",
+      "dest": "/support.html"
+    },
+    {
+      "src": "^/$",
+      "dest": "/index.html"
+    },
+
+    {
+      "src": ".*",
+      "status": 404,
+      "dest": "/error.html"
     }
   ],
 
